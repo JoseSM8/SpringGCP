@@ -1,6 +1,5 @@
 package cl.ejercicio.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +24,11 @@ public class CoursesServiceImpl implements CoursesService {
 	
 	@Override
 	public List<CoursesDTO> findAll(int page, int limit) {
-		List<CoursesDTO> coursesReturn = new ArrayList<>();
 		if(page > 0) page = page-1;
 		Pageable pageableRequest = PageRequest.of(page, limit);
 		Page<CoursesDTO> coursesPage = coursesRepository.findAll(pageableRequest);
 		List<CoursesDTO> courses = coursesPage.getContent();
-		
-		for (CoursesDTO coursesDTO : courses) {
-			coursesReturn.add(coursesDTO);
-		}
-		return coursesReturn;
+		return courses;
 	}
 	
 	@Override
